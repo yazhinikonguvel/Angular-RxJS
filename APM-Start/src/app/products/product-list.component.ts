@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, EMPTY, of } from 'rxjs';
 
 import { ProductService } from './product.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './product-list.component.html',
@@ -15,7 +15,7 @@ export class ProductListComponent {
   errorMessage = '';
   categories;
 
-  products$ = this.productService.products$
+  products$ = this.productService.productsWithCategory$
   .pipe(
     catchError(err => {
       this.errorMessage = err;
